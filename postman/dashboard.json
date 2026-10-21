@@ -1,0 +1,1793 @@
+{
+  "info": {
+    "_postman_id": "3097eb32-63ee-4a7f-a136-2c10856682af",
+    "name": "Rezide · Dashboard Analytics API",
+    "description": "Read-only dashboard endpoints. Set {{token}} to a valid JWT (owner token for firm scope, agent token for self scope). Run '01 · Meta' first to populate {{agentId}}.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "56444022",
+    "_collection_link": "https://go.postman.co/collection/56444022-3097eb32-63ee-4a7f-a136-2c10856682af?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Health",
+      "item": [
+        {
+          "name": "Liveness",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", () => pm.response.to.have.status(200));\npm.test(\"success is true\", () => pm.expect(pm.response.json().success).to.eql(true));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/health/live",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "health",
+                "live"
+              ]
+            },
+            "description": "No DB access."
+          },
+          "response": []
+        },
+        {
+          "name": "Readiness",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", () => pm.response.to.have.status(200));\npm.test(\"success is true\", () => pm.expect(pm.response.json().success).to.eql(true));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/health/ready",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "health",
+                "ready"
+              ]
+            },
+            "description": "Pings MongoDB; 503 if not connected."
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Dashboard",
+      "item": [
+        {
+          "name": "02 · Revenue",
+          "item": [
+            {
+              "name": "Revenue · last 6 months",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"Status is 200\", () => pm.response.to.have.status(200));\npm.test(\"success is true\", () => pm.expect(pm.response.json().success).to.eql(true));"
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:3000/v1/dashboard/revenue?period=6m&propertyType=all&intent=all",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3000",
+                  "path": [
+                    "v1",
+                    "dashboard",
+                    "revenue"
+                  ],
+                  "query": [
+                    {
+                      "key": "period",
+                      "value": "6m",
+                      "description": "6m | 12m | custom (custom needs from/to YYYY-MM-DD)"
+                    },
+                    {
+                      "key": "propertyType",
+                      "value": "all"
+                    },
+                    {
+                      "key": "intent",
+                      "value": "all"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Revenue · 12m, home, buy",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"Status is 200\", () => pm.response.to.have.status(200));\npm.test(\"success is true\", () => pm.expect(pm.response.json().success).to.eql(true));"
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:3000/v1/dashboard/revenue?period=12m&propertyType=home&intent=buy",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3000",
+                  "path": [
+                    "v1",
+                    "dashboard",
+                    "revenue"
+                  ],
+                  "query": [
+                    {
+                      "key": "period",
+                      "value": "12m"
+                    },
+                    {
+                      "key": "propertyType",
+                      "value": "home"
+                    },
+                    {
+                      "key": "intent",
+                      "value": "buy"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Revenue · custom range",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"Status is 200\", () => pm.response.to.have.status(200));\npm.test(\"success is true\", () => pm.expect(pm.response.json().success).to.eql(true));"
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:3000/v1/dashboard/revenue?period=custom&from=2025-01-01&to=2025-12-31",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3000",
+                  "path": [
+                    "v1",
+                    "dashboard",
+                    "revenue"
+                  ],
+                  "query": [
+                    {
+                      "key": "period",
+                      "value": "custom"
+                    },
+                    {
+                      "key": "from",
+                      "value": "2025-01-01"
+                    },
+                    {
+                      "key": "to",
+                      "value": "2025-12-31"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "03 · Pipeline",
+          "item": [
+            {
+              "name": "Pipeline · new",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"Status is 200\", () => pm.response.to.have.status(200));\npm.test(\"success is true\", () => pm.expect(pm.response.json().success).to.eql(true));"
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:3000/v1/dashboard/pipeline?period=6m&stageType=new",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3000",
+                  "path": [
+                    "v1",
+                    "dashboard",
+                    "pipeline"
+                  ],
+                  "query": [
+                    {
+                      "key": "period",
+                      "value": "6m",
+                      "description": "6m | 12m | custom (custom needs from/to YYYY-MM-DD)"
+                    },
+                    {
+                      "key": "stageType",
+                      "value": "new",
+                      "description": "new | active | closed | junk"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Pipeline · active",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"Status is 200\", () => pm.response.to.have.status(200));\npm.test(\"success is true\", () => pm.expect(pm.response.json().success).to.eql(true));"
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:3000/v1/dashboard/pipeline?period=6m&stageType=active",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3000",
+                  "path": [
+                    "v1",
+                    "dashboard",
+                    "pipeline"
+                  ],
+                  "query": [
+                    {
+                      "key": "period",
+                      "value": "6m",
+                      "description": "6m | 12m | custom (custom needs from/to YYYY-MM-DD)"
+                    },
+                    {
+                      "key": "stageType",
+                      "value": "active",
+                      "description": "new | active | closed | junk"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Pipeline · closed",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"Status is 200\", () => pm.response.to.have.status(200));\npm.test(\"success is true\", () => pm.expect(pm.response.json().success).to.eql(true));"
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:3000/v1/dashboard/pipeline?period=6m&stageType=closed",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3000",
+                  "path": [
+                    "v1",
+                    "dashboard",
+                    "pipeline"
+                  ],
+                  "query": [
+                    {
+                      "key": "period",
+                      "value": "6m",
+                      "description": "6m | 12m | custom (custom needs from/to YYYY-MM-DD)"
+                    },
+                    {
+                      "key": "stageType",
+                      "value": "closed",
+                      "description": "new | active | closed | junk"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Pipeline · junk",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"Status is 200\", () => pm.response.to.have.status(200));\npm.test(\"success is true\", () => pm.expect(pm.response.json().success).to.eql(true));"
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:3000/v1/dashboard/pipeline?period=6m&stageType=junk",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3000",
+                  "path": [
+                    "v1",
+                    "dashboard",
+                    "pipeline"
+                  ],
+                  "query": [
+                    {
+                      "key": "period",
+                      "value": "6m",
+                      "description": "6m | 12m | custom (custom needs from/to YYYY-MM-DD)"
+                    },
+                    {
+                      "key": "stageType",
+                      "value": "junk",
+                      "description": "new | active | closed | junk"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "04 · Categories",
+          "item": [
+            {
+              "name": "Categories · intent",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"Status is 200\", () => pm.response.to.have.status(200));\npm.test(\"success is true\", () => pm.expect(pm.response.json().success).to.eql(true));"
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:3000/v1/dashboard/categories?dimension=intent&period=6m",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3000",
+                  "path": [
+                    "v1",
+                    "dashboard",
+                    "categories"
+                  ],
+                  "query": [
+                    {
+                      "key": "dimension",
+                      "value": "intent",
+                      "description": "intent | property_type | source"
+                    },
+                    {
+                      "key": "period",
+                      "value": "6m",
+                      "description": "6m | 12m | custom (custom needs from/to YYYY-MM-DD)"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Categories · property_type",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"Status is 200\", () => pm.response.to.have.status(200));\npm.test(\"success is true\", () => pm.expect(pm.response.json().success).to.eql(true));"
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:3000/v1/dashboard/categories?dimension=property_type&period=6m",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3000",
+                  "path": [
+                    "v1",
+                    "dashboard",
+                    "categories"
+                  ],
+                  "query": [
+                    {
+                      "key": "dimension",
+                      "value": "property_type",
+                      "description": "intent | property_type | source"
+                    },
+                    {
+                      "key": "period",
+                      "value": "6m",
+                      "description": "6m | 12m | custom (custom needs from/to YYYY-MM-DD)"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Categories · source",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"Status is 200\", () => pm.response.to.have.status(200));\npm.test(\"success is true\", () => pm.expect(pm.response.json().success).to.eql(true));"
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:3000/v1/dashboard/categories?dimension=source&period=6m",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3000",
+                  "path": [
+                    "v1",
+                    "dashboard",
+                    "categories"
+                  ],
+                  "query": [
+                    {
+                      "key": "dimension",
+                      "value": "source",
+                      "description": "intent | property_type | source"
+                    },
+                    {
+                      "key": "period",
+                      "value": "6m",
+                      "description": "6m | 12m | custom (custom needs from/to YYYY-MM-DD)"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "05 · Breakdown",
+          "item": [
+            {
+              "name": "Breakdown · source",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"Status is 200\", () => pm.response.to.have.status(200));\npm.test(\"success is true\", () => pm.expect(pm.response.json().success).to.eql(true));"
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:3000/v1/dashboard/breakdown?dimension=source&period=6m&sortBy=totalLeads&sortDir=desc&page=1&limit=20",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3000",
+                  "path": [
+                    "v1",
+                    "dashboard",
+                    "breakdown"
+                  ],
+                  "query": [
+                    {
+                      "key": "dimension",
+                      "value": "source"
+                    },
+                    {
+                      "key": "period",
+                      "value": "6m"
+                    },
+                    {
+                      "key": "sortBy",
+                      "value": "totalLeads",
+                      "description": "label | newLeads | activeLeads | dealsClosed | junkLeads | archivedLeads | totalLeads | revenueGenerated"
+                    },
+                    {
+                      "key": "sortDir",
+                      "value": "desc"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20",
+                      "description": "max 100"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Breakdown · intent",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"Status is 200\", () => pm.response.to.have.status(200));\npm.test(\"success is true\", () => pm.expect(pm.response.json().success).to.eql(true));"
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:3000/v1/dashboard/breakdown?dimension=intent&period=6m&sortBy=totalLeads&sortDir=desc&page=1&limit=20",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3000",
+                  "path": [
+                    "v1",
+                    "dashboard",
+                    "breakdown"
+                  ],
+                  "query": [
+                    {
+                      "key": "dimension",
+                      "value": "intent"
+                    },
+                    {
+                      "key": "period",
+                      "value": "6m"
+                    },
+                    {
+                      "key": "sortBy",
+                      "value": "totalLeads",
+                      "description": "label | newLeads | activeLeads | dealsClosed | junkLeads | archivedLeads | totalLeads | revenueGenerated"
+                    },
+                    {
+                      "key": "sortDir",
+                      "value": "desc"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20",
+                      "description": "max 100"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Breakdown · property_type",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"Status is 200\", () => pm.response.to.have.status(200));\npm.test(\"success is true\", () => pm.expect(pm.response.json().success).to.eql(true));"
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:3000/v1/dashboard/breakdown?dimension=property_type&period=6m&sortBy=totalLeads&sortDir=desc&page=1&limit=20",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3000",
+                  "path": [
+                    "v1",
+                    "dashboard",
+                    "breakdown"
+                  ],
+                  "query": [
+                    {
+                      "key": "dimension",
+                      "value": "property_type"
+                    },
+                    {
+                      "key": "period",
+                      "value": "6m"
+                    },
+                    {
+                      "key": "sortBy",
+                      "value": "totalLeads",
+                      "description": "label | newLeads | activeLeads | dealsClosed | junkLeads | archivedLeads | totalLeads | revenueGenerated"
+                    },
+                    {
+                      "key": "sortDir",
+                      "value": "desc"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20",
+                      "description": "max 100"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "06 · Pending Actions",
+          "item": [
+            {
+              "name": "Pending · leads",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"Status is 200\", () => pm.response.to.have.status(200));\npm.test(\"success is true\", () => pm.expect(pm.response.json().success).to.eql(true));"
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:3000/v1/dashboard/pending-actions?entity=leads",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3000",
+                  "path": [
+                    "v1",
+                    "dashboard",
+                    "pending-actions"
+                  ],
+                  "query": [
+                    {
+                      "key": "entity",
+                      "value": "leads"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Pending · listings",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"Status is 200\", () => pm.response.to.have.status(200));\npm.test(\"success is true\", () => pm.expect(pm.response.json().success).to.eql(true));"
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:3000/v1/dashboard/pending-actions?entity=listings",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3000",
+                  "path": [
+                    "v1",
+                    "dashboard",
+                    "pending-actions"
+                  ],
+                  "query": [
+                    {
+                      "key": "entity",
+                      "value": "listings"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "07 · Ageing",
+          "item": [
+            {
+              "name": "Ageing · leads",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"Status is 200\", () => pm.response.to.have.status(200));\npm.test(\"success is true\", () => pm.expect(pm.response.json().success).to.eql(true));\nconst t = pm.response.json().data.thresholds.map(x => x.count);\npm.test(\"Thresholds are cumulative (non-increasing)\", () => t.forEach((c, i) => i && pm.expect(c).to.be.at.most(t[i-1])));"
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:3000/v1/dashboard/ageing?entity=leads",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3000",
+                  "path": [
+                    "v1",
+                    "dashboard",
+                    "ageing"
+                  ],
+                  "query": [
+                    {
+                      "key": "entity",
+                      "value": "leads"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Ageing · listings",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"Status is 200\", () => pm.response.to.have.status(200));\npm.test(\"success is true\", () => pm.expect(pm.response.json().success).to.eql(true));"
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:3000/v1/dashboard/ageing?entity=listings",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3000",
+                  "path": [
+                    "v1",
+                    "dashboard",
+                    "ageing"
+                  ],
+                  "query": [
+                    {
+                      "key": "entity",
+                      "value": "listings"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "08 · Performance",
+          "item": [
+            {
+              "name": "Performance · sort totalLeads",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"Status is 200\", () => pm.response.to.have.status(200));\npm.test(\"success is true\", () => pm.expect(pm.response.json().success).to.eql(true));"
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:3000/v1/dashboard/performance?period=6m&sortBy=totalLeads&sortDir=desc&page=1&limit=20",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3000",
+                  "path": [
+                    "v1",
+                    "dashboard",
+                    "performance"
+                  ],
+                  "query": [
+                    {
+                      "key": "period",
+                      "value": "6m",
+                      "description": "6m | 12m | custom (custom needs from/to YYYY-MM-DD)"
+                    },
+                    {
+                      "key": "sortBy",
+                      "value": "totalLeads"
+                    },
+                    {
+                      "key": "sortDir",
+                      "value": "desc"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Performance · sort visitsDone",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"Status is 200\", () => pm.response.to.have.status(200));\npm.test(\"success is true\", () => pm.expect(pm.response.json().success).to.eql(true));"
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:3000/v1/dashboard/performance?period=6m&sortBy=visitsDone&sortDir=desc&page=1&limit=20",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3000",
+                  "path": [
+                    "v1",
+                    "dashboard",
+                    "performance"
+                  ],
+                  "query": [
+                    {
+                      "key": "period",
+                      "value": "6m",
+                      "description": "6m | 12m | custom (custom needs from/to YYYY-MM-DD)"
+                    },
+                    {
+                      "key": "sortBy",
+                      "value": "visitsDone"
+                    },
+                    {
+                      "key": "sortDir",
+                      "value": "desc"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Performance · sort dealsClosed",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"Status is 200\", () => pm.response.to.have.status(200));\npm.test(\"success is true\", () => pm.expect(pm.response.json().success).to.eql(true));"
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:3000/v1/dashboard/performance?period=6m&sortBy=dealsClosed&sortDir=desc&page=1&limit=20",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3000",
+                  "path": [
+                    "v1",
+                    "dashboard",
+                    "performance"
+                  ],
+                  "query": [
+                    {
+                      "key": "period",
+                      "value": "6m",
+                      "description": "6m | 12m | custom (custom needs from/to YYYY-MM-DD)"
+                    },
+                    {
+                      "key": "sortBy",
+                      "value": "dealsClosed"
+                    },
+                    {
+                      "key": "sortDir",
+                      "value": "desc"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Performance · sort revenueGenerated",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"Status is 200\", () => pm.response.to.have.status(200));\npm.test(\"success is true\", () => pm.expect(pm.response.json().success).to.eql(true));"
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:3000/v1/dashboard/performance?period=6m&sortBy=revenueGenerated&sortDir=desc&page=1&limit=20",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3000",
+                  "path": [
+                    "v1",
+                    "dashboard",
+                    "performance"
+                  ],
+                  "query": [
+                    {
+                      "key": "period",
+                      "value": "6m",
+                      "description": "6m | 12m | custom (custom needs from/to YYYY-MM-DD)"
+                    },
+                    {
+                      "key": "sortBy",
+                      "value": "revenueGenerated"
+                    },
+                    {
+                      "key": "sortDir",
+                      "value": "desc"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "09 · Forecast",
+          "item": [
+            {
+              "name": "Forecast · sort activeLeads",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"Status is 200\", () => pm.response.to.have.status(200));\npm.test(\"success is true\", () => pm.expect(pm.response.json().success).to.eql(true));"
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:3000/v1/dashboard/forecast?sortBy=activeLeads&sortDir=desc&page=1&limit=20",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3000",
+                  "path": [
+                    "v1",
+                    "dashboard",
+                    "forecast"
+                  ],
+                  "query": [
+                    {
+                      "key": "sortBy",
+                      "value": "activeLeads"
+                    },
+                    {
+                      "key": "sortDir",
+                      "value": "desc"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Forecast · sort revenueWithin1m",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"Status is 200\", () => pm.response.to.have.status(200));\npm.test(\"success is true\", () => pm.expect(pm.response.json().success).to.eql(true));"
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:3000/v1/dashboard/forecast?sortBy=revenueWithin1m&sortDir=desc&page=1&limit=20",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3000",
+                  "path": [
+                    "v1",
+                    "dashboard",
+                    "forecast"
+                  ],
+                  "query": [
+                    {
+                      "key": "sortBy",
+                      "value": "revenueWithin1m"
+                    },
+                    {
+                      "key": "sortDir",
+                      "value": "desc"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Forecast · sort revenueWithin3m",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"Status is 200\", () => pm.response.to.have.status(200));\npm.test(\"success is true\", () => pm.expect(pm.response.json().success).to.eql(true));"
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:3000/v1/dashboard/forecast?sortBy=revenueWithin3m&sortDir=desc&page=1&limit=20",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3000",
+                  "path": [
+                    "v1",
+                    "dashboard",
+                    "forecast"
+                  ],
+                  "query": [
+                    {
+                      "key": "sortBy",
+                      "value": "revenueWithin3m"
+                    },
+                    {
+                      "key": "sortDir",
+                      "value": "desc"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Forecast · sort revenueWithin6m",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"Status is 200\", () => pm.response.to.have.status(200));\npm.test(\"success is true\", () => pm.expect(pm.response.json().success).to.eql(true));"
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:3000/v1/dashboard/forecast?sortBy=revenueWithin6m&sortDir=desc&page=1&limit=20",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3000",
+                  "path": [
+                    "v1",
+                    "dashboard",
+                    "forecast"
+                  ],
+                  "query": [
+                    {
+                      "key": "sortBy",
+                      "value": "revenueWithin6m"
+                    },
+                    {
+                      "key": "sortDir",
+                      "value": "desc"
+                    },
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "20"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Owner · single agent",
+          "item": [
+            {
+              "name": "Pipeline · one agent",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"Status is 200\", () => pm.response.to.have.status(200));\npm.test(\"success is true\", () => pm.expect(pm.response.json().success).to.eql(true));"
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:3000/v1/dashboard/pipeline?stageType=active&agentId={{agentId}}",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3000",
+                  "path": [
+                    "v1",
+                    "dashboard",
+                    "pipeline"
+                  ],
+                  "query": [
+                    {
+                      "key": "stageType",
+                      "value": "active"
+                    },
+                    {
+                      "key": "agentId",
+                      "value": "{{agentId}}"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Performance · one agent",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"Status is 200\", () => pm.response.to.have.status(200));\npm.test(\"success is true\", () => pm.expect(pm.response.json().success).to.eql(true));"
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:3000/v1/dashboard/performance?agentId={{agentId}}",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3000",
+                  "path": [
+                    "v1",
+                    "dashboard",
+                    "performance"
+                  ],
+                  "query": [
+                    {
+                      "key": "agentId",
+                      "value": "{{agentId}}"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Forecast · one agent",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "type": "text/javascript",
+                    "exec": [
+                      "pm.test(\"Status is 200\", () => pm.response.to.have.status(200));\npm.test(\"success is true\", () => pm.expect(pm.response.json().success).to.eql(true));"
+                    ]
+                  }
+                }
+              ],
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:3000/v1/dashboard/forecast?agentId={{agentId}}",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "3000",
+                  "path": [
+                    "v1",
+                    "dashboard",
+                    "forecast"
+                  ],
+                  "query": [
+                    {
+                      "key": "agentId",
+                      "value": "{{agentId}}"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            }
+          ],
+          "description": "Run 01 · Meta first: it stores the first agent in {{agentId}}. Requires an owner token."
+        },
+        {
+          "name": "01 · Meta",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 200\", () => pm.response.to.have.status(200));\npm.test(\"success is true\", () => pm.expect(pm.response.json().success).to.eql(true));\nconst d = pm.response.json().data;\nif (d.availableAgents?.length) pm.collectionVariables.set(\"agentId\", d.availableAgents[0].agentId);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/v1/dashboard/meta",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "v1",
+                "dashboard",
+                "meta"
+              ]
+            },
+            "description": "Scope, firm, agents, stages/sub-stages, filter options, feature flags."
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Negative tests",
+      "item": [
+        {
+          "name": "401 · no token",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 401\", () => pm.response.to.have.status(401));\npm.test(\"success is false\", () => pm.expect(pm.response.json().success).to.eql(false));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/v1/dashboard/meta",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "v1",
+                "dashboard",
+                "meta"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "400 · invalid stageType",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 400\", () => pm.response.to.have.status(400));\npm.test(\"success is false\", () => pm.expect(pm.response.json().success).to.eql(false));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/v1/dashboard/pipeline?stageType=won",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "v1",
+                "dashboard",
+                "pipeline"
+              ],
+              "query": [
+                {
+                  "key": "stageType",
+                  "value": "won"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "400 · custom range > 24 months",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 400\", () => pm.response.to.have.status(400));\npm.test(\"success is false\", () => pm.expect(pm.response.json().success).to.eql(false));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/v1/dashboard/revenue?period=custom&from=2023-01-01&to=2026-10-01",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "v1",
+                "dashboard",
+                "revenue"
+              ],
+              "query": [
+                {
+                  "key": "period",
+                  "value": "custom"
+                },
+                {
+                  "key": "from",
+                  "value": "2023-01-01"
+                },
+                {
+                  "key": "to",
+                  "value": "2026-10-01"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "400 · custom without dates",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 400\", () => pm.response.to.have.status(400));\npm.test(\"success is false\", () => pm.expect(pm.response.json().success).to.eql(false));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/v1/dashboard/revenue?period=custom",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "v1",
+                "dashboard",
+                "revenue"
+              ],
+              "query": [
+                {
+                  "key": "period",
+                  "value": "custom"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "400 · limit > 100",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 400\", () => pm.response.to.have.status(400));\npm.test(\"success is false\", () => pm.expect(pm.response.json().success).to.eql(false));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/v1/dashboard/breakdown?limit=500",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "v1",
+                "dashboard",
+                "breakdown"
+              ],
+              "query": [
+                {
+                  "key": "limit",
+                  "value": "500"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "400 · invalid agentId",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 400\", () => pm.response.to.have.status(400));\npm.test(\"success is false\", () => pm.expect(pm.response.json().success).to.eql(false));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/v1/dashboard/performance?agentId=abc",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "v1",
+                "dashboard",
+                "performance"
+              ],
+              "query": [
+                {
+                  "key": "agentId",
+                  "value": "abc"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "403 · agent requests another agent",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status is 403\", () => pm.response.to.have.status(403));\npm.test(\"success is false\", () => pm.expect(pm.response.json().success).to.eql(false));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:3000/v1/dashboard/pipeline?agentId=659d26ffcee1bd1b4eb94e6d",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "3000",
+              "path": [
+                "v1",
+                "dashboard",
+                "pipeline"
+              ],
+              "query": [
+                {
+                  "key": "agentId",
+                  "value": "659d26ffcee1bd1b4eb94e6d"
+                }
+              ]
+            },
+            "description": "Use a NON-owner token in {{token}} and a different agent id in {{otherAgentId}}."
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{token}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3000"
+    },
+    {
+      "key": "token",
+      "value": ""
+    },
+    {
+      "key": "agentId",
+      "value": ""
+    },
+    {
+      "key": "otherAgentId",
+      "value": ""
+    }
+  ]
+}
